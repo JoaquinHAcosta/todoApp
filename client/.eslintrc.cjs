@@ -34,6 +34,7 @@ module.exports = {
         "indent": "off",
         "@typescript-eslint/indent": "off",
         "react/prop-types": "off",
-        "react/react-in-jsx-scope": "off"
+        "react/react-in-jsx-scope": "off",
+        "no-case-declarations": 0
     }
 }
