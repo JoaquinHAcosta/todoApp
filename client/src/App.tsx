@@ -1,5 +1,5 @@
 import React from 'react'
-import { Todos } from './components/todos'
+import { Todos } from './components/Todos'
 import { type TodoId, type Todo as TodoType } from './types.d'
 
 const mockTodos = [
@@ -23,14 +23,14 @@ const mockTodos = [
 const App: React.FC = () => {
   const [ todos, setTodos ] = React.useState(mockTodos)
 
-  const handleRemove = ( { id }: TodoId) => {
+  const handleRemove = ({ id }: TodoId): void => {
     const newTodos = todos.filter(todo => todo.id !== id)
     setTodos(newTodos)
   }
 
   const handleCompleted = (
-    { id, completed }: Pick<TodoType, 'id' | 'completed'>) : void => {
-      const newTodos = todos.map( todo => {
+    { id, completed }: Pick<TodoType, 'id' | 'completed'>): void => {
+      const newTodos = todos.map(todo => {
         if (todo.id === id) {
           return {
             ...todo,
@@ -46,10 +46,10 @@ const App: React.FC = () => {
   return (
     <div className='todoapp'>
       <h1>todo mvc</h1>
-      <Todos 
+      <Todos
         todos={todos}
         onRemoveTodo={handleRemove}
-        onToggleCompleted={handleCompleted}
+        onToggleCompleteTodo={handleCompleted}
       />
     </div>
   )

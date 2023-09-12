@@ -23,12 +23,16 @@ module.exports = {
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module",
-        "project": "./tsconfig.json"
+        "project": "./client/tsconfig.json"
     },
     "plugins": [
         "react"
     ],
     "rules": {
+        "array-bracket-spacing": "off",
+        'space-before-function-paren': 'off',
+        "indent": "off",
+        "@typescript-eslint/indent": "off",
         "react/prop-types": "off",
         "react/react-in-jsx-scope": "off"
     }
