@@ -1,5 +1,6 @@
 import { TODO_FILTERS } from '../const'
 import { type TodoList, type FilterValue } from '../types'
+import { fetchTodos, updateTodos } from '../services/todos'
 import React from 'react'
 
 const initialState = {
@@ -166,6 +167,20 @@ export const useTodos = (): {
 
     const completedCount = todos.filter((todo) => todo.completed).length
     const activeCount = todos.length - completedCount
+
+    React.useEffect(() => {
+        fetchTodos()
+            .then(todos => {
+                dispatch({ type: 'INIT_TODOS', payload: { todos } })
+            })
+            .catch(error => { console.log(error) })
+    }, [])
+
+    React.useEffect(() => {
+        if (sync) {
+            updateTodos({ todos }).catch(error => { console.log(error) })
+        }
+    }, [todos, sync])
 
     return {
         activeCount,
