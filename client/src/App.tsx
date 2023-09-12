@@ -53,11 +53,17 @@ const App: React.FC = () => {
   const activeCount = todos.filter(todo => !todo.completed).length
   const completedCount = todos.length - activeCount
 
+  const filteredTodos = todos.filter(todo => {
+    if (filterSelected === TODO_FILTERS.ACTIVE) return !todo.completed
+    if (filterSelected === TODO_FILTERS.COMPLETED) return todo.completed
+    return todo
+  })
+
   return (
     <div className='todoapp'>
       <h1>todo mvc</h1>
       <Todos
-        todos={todos}
+        todos={filteredTodos}
         onRemoveTodo={handleRemove}
         onToggleCompleteTodo={handleCompleted}
       />

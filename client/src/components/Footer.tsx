@@ -24,7 +24,7 @@ export const Footer: React.FC<Props> = ({
 
             <Filters
                 filterSelected={filterSelected}
-                onFilterChange={() => { handleFilterChange }}
+                onFilterChange={ handleFilterChange }
             />
         </footer>
     )
