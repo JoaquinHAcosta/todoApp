@@ -1,5 +1,5 @@
 import { TODO_FILTERS } from '../const'
-import { type TodoList, type FilterValue } from '../types'
+import { type TodoList, type FilterValue } from '../types.d'
 import { fetchTodos, updateTodos } from '../services/todos'
 import React from 'react'
 
@@ -39,11 +39,11 @@ const reducer = (state: State, action: Action): State => {
     const { type } = action
     switch (type) {
         case 'INIT_TODOS':
-            const { todos } = action.payload
+            // const { todos } = action.payload
             return {
                 ...state,
                 sync: false,
-                todos
+                todos: action.payload.todos
             }
         case 'CLEAR_COMPLETED':
             return {
@@ -156,14 +156,24 @@ export const useTodos = (): {
         window.history.pushState({}, '', `${window.location.pathname}?${params.toString()}`)
     }
 
+    // const filteredTodos = todos.filter(todo => {
+    //     if (filterSelected === TODO_FILTERS.ACTIVE) {
+    //         return !todo.completed
+    //     }
+    //     if (filterSelected === TODO_FILTERS.COMPLETED) {
+    //         return todo.completed
+    //     }
+    //     return todo
+    // })
+
     const filteredTodos = todos.filter(todo => {
         if (filterSelected === TODO_FILTERS.ACTIVE) {
-            return !todo.completed
+          return !todo.completed
         }
         if (filterSelected === TODO_FILTERS.COMPLETED) {
-            return todo.completed
+          return todo.completed
         }
-        return todo
+        return true
     })
 
     const completedCount = todos.filter((todo) => todo.completed).length
