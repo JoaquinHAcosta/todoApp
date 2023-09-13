@@ -9,6 +9,10 @@ interface Props {
 export const Filters: React.FC<Props> = (
     { filterSelected, onFilterChange }
 ) => {
+    const handleClick = (filter: FilterValue) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault()
+        onFilterChange(filter)
+    }
     return (
         // <ul className="filters">
         //     {
@@ -40,11 +44,7 @@ export const Filters: React.FC<Props> = (
                 <li key={key}>
                     <a href={href}
                     className={className}
-                    // onClick={handleClick(key as FilterValue)}>{literal}
-                    onClick={(event) => {
-                        event.preventDefault()
-                        onFilterChange(key as FilterValue)
-                    }}
+                    onClick={handleClick(key as FilterValue)}
                     >{literal}</a>
                 </li>
                 )

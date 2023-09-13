@@ -1,8 +1,7 @@
-import { type TodoTitle } from '../types.d'
 import React from 'react'
 
 interface Props {
-    saveTodo: ({ title }: TodoTitle) => void
+    saveTodo: (title: string) => void
 }
 
 export const CreateTodo: React.FC<Props> = ({ saveTodo }) => {
@@ -10,7 +9,7 @@ export const CreateTodo: React.FC<Props> = ({ saveTodo }) => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault()
-        saveTodo({ title: inputValue })
+        saveTodo(inputValue)
         setInputValue('')
     }
 
