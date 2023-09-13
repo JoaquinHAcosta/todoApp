@@ -74,11 +74,11 @@ const reducer = (state: State, action: Action): State => {
                 filterSelected: filter
             }
         case 'REMOVE':
-            const { id } = action.payload
+            // const { id } = action.payload
             return {
                 ...state,
                 sync: true,
-                todos: state.todos.filter((todo) => todo.id !== id)
+                todos: state.todos.filter((todo) => todo.id !== action.payload.id)
             }
         case 'SAVE':
             const { title } = action.payload
@@ -94,12 +94,13 @@ const reducer = (state: State, action: Action): State => {
                 todos: [...state.todos, newTodo]
             }
         case 'UPDATE_TITLE':
-            const { id, title } = action.payload
+            // const { id, title } = action.payload
             return {
                 ...state,
                 sync: true,
                 todos: state.todos.map((todo) => {
-                    if (todo.id === id) {
+                    if (todo.id === action.payload.id) {
+                        const { title } = action.payload
                         return {
                             ...todo,
                             title
@@ -120,7 +121,7 @@ export const useTodos = (): {
     filterSelected: FilterValue
     handleClearCompleted: () => void
     handleCompleted: (id: string, completed: boolean) => void
-    handleFilterchange: (filter: FilterValue) => void
+    handleFilterChange: (filter: FilterValue) => void
     handleRemove: (id: string) => void
     handleSave: (title: string) => void
     handleUpdateTitle: (params: { id: string, title: string }) => void
@@ -185,12 +186,13 @@ export const useTodos = (): {
     return {
         activeCount,
         completedCount,
+        filterSelected,
         handleCompleted,
         handleRemove,
         handleUpdateTitle,
         handleSave,
-        handleClearCompleted,
         handleFilterChange,
+        handleClearCompleted,
         todos: filteredTodos
     }
 }
